@@ -1,0 +1,123 @@
+void setup() {
+ // put your setup code here, to run once:
+Serial.begin(9600);
+pinMode(4,OUTPUT);
+}
+
+
+char x;
+
+
+void loop() {
+ // put your main code here, to run repeatedly:
+int amount;
+amount = Serial.available();
+
+
+if (amount>0){
+x = Serial.read();
+
+
+if(x=='T'|| x=='t'){
+int T = analogRead(A3);
+Serial.print("The raw temperature value is: ");
+Serial.println(T);
+delay(1000);
+}
+
+
+if(x=='L'|| x=='l'){
+ int l = analogRead(A5);
+ if(l<=100)
+   Serial.println("95% brightness");
+ else if(l>100 && l<=250)
+   Serial.println("80% brightness");
+ else if(l>250 && l<=500)
+   Serial.println("65% brightness");
+ else if(l>500 && l<=750)
+   Serial.println("50% brightness");
+ else if(l>750 && l<=1000)
+   Serial.println("25% brightness");
+ else
+   Serial.println("10% brightness");   
+}
+
+
+if(x=='j'|| x=='J'){
+ int Y=analogRead(A0);
+int X=analogRead(A1);
+if(Y>=500 && Y<=550){
+  if(X>=500 && X<=550)
+Serial.println("The position of Joystick is (Center, Center)");
+}
+if(Y>=500 && Y<=700){
+  if(X>=1000)
+Serial.println("The position of Joystick is (Center, Up)");
+}
+if(Y>=500 && Y<=700){
+  if(X<=100)
+Serial.println("The position of Joystick is (Center, Down)");
+}
+if(Y<=100){
+  if(X>=500 && X<=700)
+Serial.println("The position of Joystick is (Left, Center)");
+}
+if(Y<=100){
+  if(X>700)
+Serial.println("The position of Joystick is (Left, Up)");
+}
+if(Y<=100){
+  if(X<500)
+Serial.println("The position of Joystick is (Left, Down)");
+}
+if(X>=500 && X<=600){
+  if(Y>=1000)
+Serial.println("The position of Joystick is (Right, Center)");
+}
+if(Y>700){
+  if(X<=100)
+Serial.println("The position of Joystick is (Right, Down)");
+}
+if(X>=600){
+  if(Y>=1000)
+Serial.println("The position of Joystick is (Right, Up)");
+}
+}
+
+
+int light=0;
+
+
+if(x=='B'|| x=='b'){
+light=1;
+}
+
+
+if(x=='1'){
+ if(light=1){
+analogWrite(4,129);
+delay(3000);
+analogWrite(4,0);
+}
+}
+if(x=='2'){
+ if(light=1){
+analogWrite(4,191);
+delay(3000);
+analogWrite(4,0);
+}
+}
+if(x=='3'){
+ if(light=1){
+analogWrite(4,255);
+delay(3000);
+analogWrite(4,0);
+}
+}
+
+
+}
+}
+
+
+
