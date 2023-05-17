@@ -1,0 +1,260 @@
+int red = 4;
+int blue=6;
+int green =5;
+void setup() {
+ // put your setup code here, to run once:
+Serial.begin(9600);
+ pinMode(red,OUTPUT);
+ pinMode(blue,OUTPUT);
+ pinMode(green,OUTPUT);
+}
+char x=0;
+int Dash=0;
+int Dot=0;
+int i=0;
+int k=0;
+int number=0;
+int speed=0;
+int s=0;
+void loop() {
+ // put your main code here, to run repeatedly:
+int amount;
+ amount = Serial.available();
+ if (amount >0){
+    x= Serial.read();
+
+
+if(x=='D'){
+      Dash=1;
+    }
+   if(x=='r'){
+     if(Dash==1){
+     i=red;
+     Dash=0;
+   }
+   }
+   if(x=='g'){
+     if(Dash==1){
+     i=green;
+     Dash=0;
+   }
+ }
+ if(x=='b'){
+     if(Dash==1){
+     i=blue;
+     Dash=0;
+   }
+ }
+
+
+ if(x=='d'){
+      Dot=1;
+ }
+   if(x=='r'){
+     if(Dot==1){
+     k=red;
+     Dot=0;
+   }
+   }
+   if(x=='g'){
+     if(Dot==1){
+     k=green;
+     Dot=0;
+   }
+ }
+ if(x=='b'){
+     if(Dot==1){
+     k=blue;
+     Dot=0;
+   }
+ }
+
+
+if(x=='i'){
+   number=1;
+ }
+
+
+if(x=='s'){
+   speed=1;
+   number=0;
+ }
+if(x=='1'){
+ if(speed==1){
+   s=900;
+   speed=0;
+ } 
+}
+if(x=='2'){
+ if(speed==1){
+   s=600;
+   speed=0;
+ }
+}
+if(x=='3'){
+ if(speed==1){
+   s=300;
+   speed=0;
+ }
+}
+
+
+if(x=='0'){
+ if(number==1){
+    for(int j=0; j<5; j++){
+   digitalWrite(i,HIGH);
+   delay(s);
+   digitalWrite(i,LOW);
+   delay(s);   
+ }
+}
+}
+if(x=='1'){
+ if(number==1){
+   digitalWrite(k,HIGH);
+   delay(s);
+   digitalWrite(k,LOW);
+   delay(s);
+    for(int j=0; j<4; j++){
+   digitalWrite(i,HIGH);
+   delay(s);
+   digitalWrite(i,LOW);
+   delay(s);
+ }
+}
+}
+if(x=='2'){
+ if(number==1){
+   digitalWrite(k,HIGH);
+    delay(s);
+    digitalWrite(k,LOW);
+    delay(s);
+    digitalWrite(k,HIGH);
+    delay(s);
+    digitalWrite(k,LOW);
+    delay(s);
+    for(int j=0; j<3; j++)
+    {
+    digitalWrite(i,HIGH);
+    delay(s);
+    digitalWrite(i,LOW);
+    delay(s);
+    }
+ }
+}
+if(x=='3'){
+ if(number==1){
+    for(int j=0; j<3; j++)
+    {
+    digitalWrite(k,HIGH);
+    delay(s);
+    digitalWrite(k,LOW);
+    delay(s);
+    }
+   digitalWrite(i,HIGH);
+    delay(s);
+    digitalWrite(i,LOW);
+    delay(s);
+    digitalWrite(i,HIGH);
+    delay(s);
+    digitalWrite(i,LOW);
+    delay(s);
+ }
+}
+if(x=='4'){
+ if(number==1){
+    for(int j=0; j<4; j++)
+    {
+     digitalWrite(k,HIGH);
+     delay(s);
+     digitalWrite(k,LOW);
+     delay(s);
+    }
+   digitalWrite(i,HIGH);
+    delay(s);
+    digitalWrite(i,LOW);
+    delay(s);
+ }
+}
+if(x=='5'){
+ if(number==1){
+    for(int j=0; j<5; j++){
+   digitalWrite(k,HIGH);
+   delay(s);
+   digitalWrite(k,LOW);
+   delay(s);
+ }
+}
+}
+if(x=='6'){
+ if(number==1){
+   digitalWrite(i,HIGH);
+    delay(s);
+    digitalWrite(i,LOW);
+    delay(s);
+    for(int j=0; j<4; j++)
+    {
+    digitalWrite(k,HIGH);
+    delay(s);
+    digitalWrite(k,LOW);
+    delay(s);
+   }
+ }
+}
+if(x=='7'){
+ if(number==1){
+    digitalWrite(i,HIGH);
+    delay(s);
+    digitalWrite(i,LOW);
+    delay(s);
+    digitalWrite(i,HIGH);
+    delay(s);
+    digitalWrite(i,LOW);
+    delay(s);
+    for(int j=0; j<3; j++)
+    {
+     digitalWrite(k,HIGH);
+     delay(s);
+     digitalWrite(k,LOW);
+     delay(s);
+   }
+ }
+}
+if(x=='8'){
+ if(number==1){
+    for(int j=0; j<3; j++)
+    {
+     digitalWrite(i,HIGH);
+     delay(s);
+     digitalWrite(i,LOW);
+     delay(s);
+   }
+    digitalWrite(k,HIGH);
+    delay(s);
+    digitalWrite(k,LOW);
+    delay(s);
+    digitalWrite(k,HIGH);
+    delay(s);
+    digitalWrite(k,LOW);
+    delay(s);
+ }
+}
+if(x=='9'){
+ if(number==1){
+    for(int j=0; j<4; j++)
+    {
+     digitalWrite(i,HIGH);
+     delay(s);
+     digitalWrite(i,LOW);
+     delay(s);
+   }
+    digitalWrite(k,HIGH);
+    delay(s);
+    digitalWrite(k,LOW);
+    delay(s);
+ }
+}
+
+
+}
+}
