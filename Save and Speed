@@ -1,0 +1,313 @@
+#include <EEPROM.h>
+
+
+int red = 4;
+int blue=6;
+int green =5;
+char c[20];
+char x=0;
+int Dash=0;
+int Dot=0;
+int i=0;
+int k=0;
+int number=0;
+int speed=0;
+int s=0;
+int count=0;
+
+
+void setup() {
+// put your setup code here, to run once:
+Serial.begin(9600);
+pinMode(red,OUTPUT);
+pinMode(blue,OUTPUT);
+pinMode(green,OUTPUT);
+for(int j=0;j<=16;j++){
+ c[j]=EEPROM.read(j);
+}
+}
+
+
+void loop() {
+// put your main code here, to run repeatedly:
+int amount;
+amount = Serial.available();
+if (amount >0){
+  x= Serial.read();
+}
+
+
+if(x=='D' || c[0]=='D'){
+    Dash=1;
+    EEPROM.write(0,'D');
+  }
+ if(x=='r' || c[1]=='r'){
+   if(Dash==1){
+   i=red;
+   Dash=0;
+   EEPROM.write(1,'r');
+ }
+ }
+ if(x=='g'|| c[1]=='g'){
+   if(Dash==1){
+   i=green;
+   Dash=0;
+   EEPROM.write(1,'g');
+ }
+}
+if(x=='b' || c[1]=='b'){
+   if(Dash==1){
+   i=blue;
+   Dash=0;
+   EEPROM.write(1,'b');
+ }
+}
+
+
+
+
+
+
+
+
+if(x=='d' || c[2]=='d'){
+    Dot=1;
+    EEPROM.write(2,'d');
+}
+ if(x=='r' || c[3]=='r'){
+   if(Dot==1){
+   k=red;
+   Dot=0;
+  EEPROM.write(3,'r');
+ }
+ }
+ if(x=='g' || c[3]=='g'){
+   if(Dot==1){
+   k=green;
+   Dot=0;
+   EEPROM.write(3,'g');
+ }
+}
+if(x=='b' || c[3]=='b'){
+   if(Dot==1){
+   k=blue;
+   Dot=0;
+   EEPROM.write(3,'b');
+ }
+}
+
+
+
+
+if(x=='i' || c[4]=='i'){
+ number=1;
+ EEPROM.write(4,'i');
+}
+
+
+
+
+if(x=='s' || c[5]=='s'){
+ speed=1;
+ number=0;
+EEPROM.write(5,'s'); 
+}
+
+
+
+
+if(x=='1' || c[6]=='1'){
+if(speed==1 || c[6]=='1'){
+ s=900;
+ speed=0;
+ EEPROM.write(6,'1');
+}
+}
+if(x=='2' || c[6]=='2'){
+if(speed==1 || c[6]=='2'){
+ s=600;
+ speed=0;
+EEPROM.write(6,'2');
+}
+}
+if(x=='3' || c[6]=='3'){
+if(speed==1 || c[6]=='3'){
+ s=300;
+ speed=0;
+EEPROM.write(6,'3');
+}
+}
+
+
+if(x=='0' || c[7]=='0'){
+if(number==1 || c[7]=='0'){
+  for(int j=0; j<5; j++){
+ digitalWrite(i,HIGH);
+ delay(s);
+ digitalWrite(i,LOW);
+ delay(s);
+}
+EEPROM.write(7,'0'); 
+}
+}
+
+
+if(x=='1' || c[8]=='1'){
+if(number==1 || c[8]=='1'){
+ digitalWrite(k,HIGH);
+ delay(s);
+ digitalWrite(k,LOW);
+ delay(s);
+  for(int j=0; j<4; j++){
+ digitalWrite(i,HIGH);
+ delay(s);
+ digitalWrite(i,LOW);
+ delay(s);
+}
+ EEPROM.write(8,'1');
+}
+}
+if(x=='2' || c[9]=='2'){
+if(number==1 || c[9]=='2'){
+ digitalWrite(k,HIGH);
+  delay(s);
+  digitalWrite(k,LOW);
+  delay(s);
+  digitalWrite(k,HIGH);
+  delay(s);
+  digitalWrite(k,LOW);
+  delay(s);
+  for(int j=0; j<3; j++)
+  {
+  digitalWrite(i,HIGH);
+  delay(s);
+  digitalWrite(i,LOW);
+  delay(s);
+  }
+  EEPROM.write(9,'2');
+}
+}
+if(x=='3'|| c[10]=='3'){
+if(number==1 || c[10]=='3'){
+  for(int j=0; j<3; j++)
+  {
+  digitalWrite(k,HIGH);
+  delay(s);
+  digitalWrite(k,LOW);
+  delay(s);
+  }
+ digitalWrite(i,HIGH);
+  delay(s);
+  digitalWrite(i,LOW);
+  delay(s);
+  digitalWrite(i,HIGH);
+  delay(s);
+  digitalWrite(i,LOW);
+  delay(s);
+  EEPROM.write(10,'3');
+}
+}
+if(x=='4' || c[11]=='4'){
+if(number==1 || c[11]=='4'){
+  for(int j=0; j<4; j++)
+  {
+   digitalWrite(k,HIGH);
+   delay(s);
+   digitalWrite(k,LOW);
+   delay(s);
+  }
+ digitalWrite(i,HIGH);
+  delay(s);
+  digitalWrite(i,LOW);
+  delay(s);
+  EEPROM.write(11,'4');
+}
+}
+if(x=='5' || c[12]=='5'){
+if(number==1 || c[12]=='5'){
+  for(int j=0; j<5; j++){
+ digitalWrite(k,HIGH);
+ delay(s);
+ digitalWrite(k,LOW);
+ delay(s);
+}
+EEPROM.write(12,'5');
+}
+}
+if(x=='6' || c[13]=='6'){
+if(number==1 || c[13]=='6'){
+ digitalWrite(i,HIGH);
+  delay(s);
+  digitalWrite(i,LOW);
+  delay(s);
+  for(int j=0; j<4; j++)
+  {
+  digitalWrite(k,HIGH);
+  delay(s);
+  digitalWrite(k,LOW);
+  delay(s);
+ }
+ EEPROM.write(13,'6');
+}
+}
+if(x=='7' || c[14]=='7'){
+if(number==1 || c[14]=='7'){
+  digitalWrite(i,HIGH);
+  delay(s);
+  digitalWrite(i,LOW);
+  delay(s);
+  digitalWrite(i,HIGH);
+  delay(s);
+  digitalWrite(i,LOW);
+  delay(s);
+  for(int j=0; j<3; j++)
+  {
+   digitalWrite(k,HIGH);
+   delay(s);
+   digitalWrite(k,LOW);
+   delay(s);
+ }
+ EEPROM.write(14,'7');
+}
+}
+if(x=='8' || c[15]=='8'){
+if(number==1 || c[15]=='8'){
+  for(int j=0; j<3; j++)
+  {
+   digitalWrite(i,HIGH);
+   delay(s);
+   digitalWrite(i,LOW);
+   delay(s);
+ }
+  digitalWrite(k,HIGH);
+  delay(s);
+  digitalWrite(k,LOW);
+  delay(s);
+  digitalWrite(k,HIGH);
+  delay(s);
+  digitalWrite(k,LOW);
+  delay(s);
+  EEPROM.write(15,'8');
+}
+}
+if(x=='9'|| c[16]=='9'){
+if(number==1 || c[16]=='9'){
+  for(int j=0; j<4; j++)
+  {
+   digitalWrite(i,HIGH);
+   delay(s);
+   digitalWrite(i,LOW);
+   delay(s);
+ }
+  digitalWrite(k,HIGH);
+  delay(s);
+  digitalWrite(k,LOW);
+  delay(s);
+  EEPROM.write(16,'9');
+}
+}
+for(int j=0;j<=16;j++){
+ c[j]='p';
+}
+x='p';
+}
