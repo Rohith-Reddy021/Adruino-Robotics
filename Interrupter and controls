@@ -1,0 +1,110 @@
+#include <TimerOne.h>
+#include <time.h>
+#include <stdlib.h>
+
+
+
+
+const int green = 5;
+const int blue = 6;
+const int red = 4;
+
+
+void setup(void)
+{
+pinMode(red,OUTPUT);
+pinMode(blue,OUTPUT);
+pinMode(green,OUTPUT);
+Timer1.initialize(50000);
+Timer1.attachInterrupt(T1);
+ Timer1.attachInterrupt(T2);
+ Timer1.attachInterrupt(T3);
+Serial.begin(9600);
+}
+
+
+
+
+volatile unsigned int numbers[50];
+volatile unsigned int temp;
+int TS1=0,TS2=0,TS3=0;
+
+
+void T1(void)
+{
+ if(TS1==0){
+   digitalWrite(red, LOW);
+  for(int i=0;i<50;i++){
+  numbers[i] = rand()%100;
+  }
+  TS1=1;
+  Serial.println("T1 made number");
+ }
+   Serial.println("T1 Waiting");
+ }
+
+
+
+
+void T2(void)
+{
+if (TS1==1 && TS2==0 ) {
+  Serial.println("T2 bubble run");
+  Serial.println("T1 Waiting");
+for (int i = 0; i < 49; i++){
+  for (int j = 0; j < 49-i; j++){
+  if (numbers[j] > numbers[j + 1]){
+  temp=numbers[j];
+  numbers[j]=numbers[j + 1];
+  numbers[j + 1]=temp;
+  }
+}
+}
+TS2=1;
+Serial.println("T2 done");
+}
+else{
+ Serial.println("T2 Waiting");
+}
+}
+
+
+
+
+void T3(void)
+{
+if(TS2==1 && TS3==0){
+ for (int i = 0; i < 49; i++){
+  Serial.println(numbers[i]);
+}
+Serial.println("T3 done");
+TS3=1;
+}
+}
+
+
+void loop(void)
+{
+ digitalWrite(green, HIGH);
+  delay(1000);
+ T1();
+ digitalWrite(green, LOW);
+  delay(1000);
+ digitalWrite(blue, HIGH);
+  delay(1000);
+ T2();
+ digitalWrite(blue, LOW);
+  delay(1000);
+ digitalWrite(red, HIGH);
+  delay(1000);
+ noInterrupts();
+ Serial.println("T1 Waiting");
+ T3();
+ Serial.println("T2 Waiting");
+ interrupts();
+ digitalWrite(red, LOW);
+  delay(1000);
+  TS1=0;
+  TS2=0;
+  TS3=0;
+}
